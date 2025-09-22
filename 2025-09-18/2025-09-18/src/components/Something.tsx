@@ -6,7 +6,7 @@ function Something() {
       <div>Something</div>
       <nav>
         <Link to="/about">About</Link>
-        <Link to="/home">Home</Link>
+        <Link to="/">Home</Link>
       </nav>
       <Outlet />
     </>

@@ -5,7 +5,7 @@ function Home() {
     <>
       <div>Home</div>
       <nav>
-        <Link to="/home">Home</Link>
+        <Link to="/about">About</Link>
         <Link to="/something">Something</Link>
       </nav>
       <Outlet />
