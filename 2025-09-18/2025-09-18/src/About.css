@@ -7,15 +7,13 @@
 
 #container{
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-items: space-between;
     
 }
 
 .contactinfoContainer{
     text-align: center;
-    border-radius: 20%;
-    border-width: 20px;
     
     
 }
