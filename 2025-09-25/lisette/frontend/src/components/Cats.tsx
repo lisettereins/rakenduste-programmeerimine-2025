@@ -1,6 +1,8 @@
 import { Box, List, ListItem, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SubmitCat from "./SubmitCat.tsx";
+import DeleteCat from "./DeleteCat.tsx";
+import EditCat from "./EditCat.tsx";
 
 type Cat = {
   id: string;
@@ -24,11 +26,15 @@ const Cats = () => {
     fetchCats();
   }, []);
 
+
+
   return (
     <Box>
       <Typography variant="h1">Cats</Typography>
       <CatsList cats={cats} />
       <SubmitCat fetchCats={fetchCats} />
+      <EditCat fetchCats={fetchCats} />
+      <DeleteCat fetchCats={fetchCats} />
     </Box>
   );
 };
