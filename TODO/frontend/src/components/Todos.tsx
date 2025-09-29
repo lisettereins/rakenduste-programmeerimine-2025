@@ -1,5 +1,6 @@
 import { Box, Button, List, ListItem, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import CreateTodo from "./CreateTodo";
 
 type Todo = {
   id: string;
@@ -50,10 +51,35 @@ const Todos = () => {
     }
   };
 
+  const editTodo = async (id: string, name:string) => {
+    try {
+      const response = await fetch("http://localhost:3000/todos", {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({id, name}),
+      });
+      if (response.ok) {
+        console.log("Success", response);
+        fetchTodos();
+        
+        // Snackbar success
+      } else {
+        console.warn("No success");
+        // Snackbar
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
   return (
     <Box>
       <Typography variant="h1">To do</Typography>
-      <TodoList todos={todos} onDelete={deleteTodo} />
+      <TodoList todos={todos} onDelete={deleteTodo} onEdit={editTodo} />
+      <CreateTodo fetchTodos={fetchTodos}/>
     </Box>
   );
 };
@@ -61,29 +87,45 @@ const Todos = () => {
 type TodoListProps = {
   todos: Todo[];
   onDelete: (id: string) => void;
+  onEdit: (id: string, name: string)=> void;
 };
 
-const TodoList: React.FC<TodoListProps> = ({ todos, onDelete }) => {
+const TodoList: React.FC<TodoListProps> = ({ todos, onDelete, onEdit }) => {
   return (
+    <>
     <List>
-      {todos.map((todo) => (
+      {todos.filter(todo => !todo.deleted).map((todo) => (
         <ListItem
           key={todo.id}
           secondaryAction={
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => onDelete(todo.id)}
-            >
-              Delete
-            </Button>
+            <Box>
+              <Button
+                variant= "contained"
+                color="primary"
+                onClick={() => {
+                  const newName = prompt("Edit todo", todo.name);
+                  if (newName) onEdit(todo.id, newName);
+                }}
+                >
+                
+              </Button>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={() => onDelete(todo.id)}
+              >
+                Delete
+              </Button>
+            </Box>
           }
+
         >
           {JSON.stringify(todo)}{" "}
         </ListItem>
       ))}
-      <Button variant="contained" color="success" type="submit"></Button>
+      
     </List>
+    </>
   );
 };
 
