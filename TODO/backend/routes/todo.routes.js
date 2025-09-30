@@ -13,6 +13,6 @@ router.post("/", todoController.create);
 router.put("/", todoController.update);
 router.delete("/", todoController.delete);
 router.get("/admin", todoController.adminRead);
-router.patch("/admin", todoController.toggleDeleted);
+router.patch("/admin/:id/toggle", todoController.toggleDeleted);
 
 module.exports = router;
