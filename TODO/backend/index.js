@@ -7,7 +7,9 @@ const todoRoutes = require("./routes/todo.routes");
 app.use(cors());
 app.use(express.json());
 
-app.use("/todos", todoRoutes)
+app.use("/todos", todoRoutes);
+
+app.use("/auth", todoRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

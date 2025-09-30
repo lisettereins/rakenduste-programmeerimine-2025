@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.router();
 const todoController = require("../controllers/todo.controller");
+const authController = require("../controllers/auth.controller")
 const {
     todoRouteMiddleware,
     todoGetRouteMiddleware,
@@ -14,5 +15,7 @@ router.put("/", todoController.update);
 router.delete("/", todoController.delete);
 router.get("/admin", todoController.adminRead);
 router.patch("/admin/:id/toggle", todoController.toggleDeleted);
+router.post("/login", authController.login);
+router.get("/ping", authController.ping);
 
 module.exports = router;
