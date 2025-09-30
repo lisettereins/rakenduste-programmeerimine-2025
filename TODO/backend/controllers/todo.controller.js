@@ -47,6 +47,24 @@ exports.delete = (req, res) => {
 
     todo.deleted = true;
     todo.updatedAt = Date.now();
-    
+
     res.status(201).send("Deleted successfully")
 };
+
+exports.adminRead = (req, res) => {
+    res.send(todos);
+};
+
+exports.toggleDeleted = (req, res) => {
+    const { id } = req.params;
+    const todo = todos.find((todo) => todo.id === id);
+    if (!todo) {
+        return res.status(404).send("Todo not found");
+    }
+
+    todo.deleted = !todo.deleted;
+    todo.updatedAt = Date.now();
+
+    res.send(todo);
+};
+

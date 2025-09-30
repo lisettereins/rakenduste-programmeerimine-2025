@@ -12,5 +12,7 @@ router.get("/", todoGetRouteMiddleware, todoController.read);
 router.post("/", todoController.create);
 router.put("/", todoController.update);
 router.delete("/", todoController.delete);
+router.get("/admin", todoController.adminRead);
+router.patch("/admin", todoController.toggleDeleted);
 
 module.exports = router;
