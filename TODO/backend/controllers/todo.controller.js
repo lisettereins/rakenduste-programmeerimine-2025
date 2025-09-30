@@ -44,5 +44,9 @@ exports.delete = (req, res) => {
     if (!todo) {
         return res.status(404).send("Todo not found");
     }
+
+    todo.deleted = true;
+    todo.updatedAt = Date.now();
+    
     res.status(201).send("Deleted successfully")
 };
